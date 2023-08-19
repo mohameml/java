@@ -78,3 +78,17 @@ int result = ++a;
 // À ce stade, result vaut 6 et a vaut 6
 ```
 
+
+### RQ :
+
+pour calcluer a^b en JAVA on uitilse la Méthode .pow() de la classe Math 
+
+```java 
+int base = 3 ;
+
+int exposant = 2 ;
+
+int result = Math.pow(base , exposant);
+
+
+```
