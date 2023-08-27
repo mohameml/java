@@ -14,7 +14,7 @@ Java propose différentes types de collections pour répondre à différents bes
 
 
 
-![collection](collection.png)
+![collection](collections.png)
 
 ## 2.1 : **collections :**
 
@@ -218,9 +218,41 @@ Les cartes sont des collections clé-valeur où chaque élément est associé à
  
 
 
+## 3. Les Méthodes de l'interface `collections` :
 
 
+1. **`add(E e)` :** Cette méthode est utilisée pour ajouter un élément à la collection. Elle renvoie `true` si l'ajout réussit. Dans certains cas, lorsque l'ajout n'est pas autorisé (par exemple, si la collection est en lecture seule), elle peut lancer une exception.
 
+2. **`addAll(Collection<? extends E> c)` :** Cette méthode ajoute tous les éléments d'une autre collection `c` à la collection actuelle. Elle renvoie `true` si la collection a été modifiée à la suite de l'ajout des éléments.
+
+3. **`clear()` :** Cette méthode supprime tous les éléments de la collection, laissant la collection vide.
+
+4. **`contains(Object o)` :** Cette méthode renvoie `true` si la collection contient l'élément spécifié `o`, sinon elle renvoie `false`.
+
+5. **`isEmpty()` :** Cette méthode renvoie `true` si la collection est vide, c'est-à-dire si elle ne contient aucun élément.
+
+6. **`remove(Object o)` :** Cette méthode supprime la première occurrence de l'élément spécifié `o` de la collection, s'il est présent. Si l'élément est supprimé, la méthode renvoie `true`, sinon elle renvoie `false`.
+
+7. **`size()` :** Cette méthode renvoie le nombre d'éléments présents dans la collection.
+
+Ces méthodes sont des éléments fondamentaux pour manipuler des collections en Java. Elles fournissent des opérations essentielles pour ajouter, retirer et vérifier la présence d'éléments, ainsi que pour gérer la taille et la clarté des collections.
+
+## 4. Resume en tableau : 
+
+Quelques spécificités des classes de collections pour manipuler vos données.
+
+|NOM|ORDONNÉE|DOUBLONS|ACCÈS DIRECT|VALEURS NULLES|THREAD-SAFE|
+|:--:|:--:|:--:|:--:|:--:|:--:|
+|**ArrayDeque**|✔|✔|❌|❌|❌|
+|**ArrayList**|✔|✔|✔|✔|❌|
+|**HashMap**|❌|❌|✔|✔|❌|
+|**HashSet**|❌|❌|❌|✔|❌|
+|**LinkedList**|✔|✔|❌|✔|❌|
+|**PriorityQueue**|✔|✔|❌|❌|❌|
+|**Stack**|✔|✔|❌|✔|✔|
+|**TreeMap**|✔|❌|✔|❌|❌|
+|**TreeSet**|✔|❌|❌|❌|❌|
+|**Vector**|✔|✔|✔|✔|✔|
 
 
 
