@@ -13,6 +13,24 @@ En Java, les exceptions sont regroupées en trois catégories principales :
 3. **Erreurs (Errors)** : Ce sont des conditions graves qui ne peuvent souvent pas être gérées par le programmeur. Par exemple, `OutOfMemoryError`, `StackOverflowError`.
 
 
+#### RQ :
+
+- **les exceptions se divisent en deux catégories :**
+    
+    - **Les exceptions hors-contrôle** : qui sont les classes
+        
+        -  descendantes de ``java.lang.Error`` : ce sont typiquement des erreurs critiques qui ne peuvent pas être récupérées .
+        
+        - descendantes de ``java.lang.RuntimeException`` : il s'agit ici d'erreurs de programmation qui risquent de provoquer l'hilarité générale de vos collègues développeurs à la machine à café (par exemple la fameuse NullPointerException, grande classique des dîners mondains entre programmeurs).
+
+        -  Les exceptions  hors-contrôle (non vérifiées) sont des exceptions qui ne nécessitent pas d'être explicitement déclarées (avec ``throws``) ou attrapées (avec catch) dans la plupart des cas. Cela signifie que vous n'êtes pas obligé de les attraper, bien que vous puissiez le faire si nécessaire.
+
+    - **Les exceptions sous contrôle** : 
+        - qui sont les classes dérivées de ``java.lang.Exception``, mais pas de ``java.lang.RuntimeException``. 
+        
+        - Elles correspondent typiquement aux cas d'erreurs que l'on a anticipés, et que l'on veut traiter. Ces exceptions doivent être récupérées et traitées dans le programme
+
+
 ### 2. Exemples dex Exceptions :  
 
 voici quelques exemples d'exceptions courantes en Java :
@@ -122,7 +140,9 @@ public class InputMismatchExceptionExample {
 
 ### 3. Blocs Try-Catch
 
-Pour gérer les exceptions en Java, vous pouvez utiliser les blocs `try` et `catch`. Un bloc `try` englobe le code qui peut provoquer une exception, tandis qu'un ou plusieurs blocs `catch` spécifient comment gérer chaque type d'exception possible.
+- Pour gérer les exceptions en Java, vous pouvez utiliser les blocs `try` et `catch`. 
+
+- Un bloc `try` englobe le code qui peut provoquer une exception, tandis qu'un ou plusieurs blocs `catch` spécifient comment gérer chaque type d'exception possible.
 
 ```java
 try {
@@ -190,7 +210,9 @@ public class App {
 
 ### 5. Lancer des Exceptions
 
-En Java, vous pouvez également lancer des exceptions à l'aide du mot-clé `throw`. Cela permet à votre code de signaler une situation exceptionnelle à un niveau supérieur.
+- En Java, vous pouvez également lancer des exceptions à l'aide du mot-clé `throw`. 
+
+- Cela permet à votre code de signaler une situation exceptionnelle à un niveau supérieur.
 
 ```java
 if (condition) {
@@ -222,7 +244,7 @@ public class ThrowExample {
 
 ### 6. Personnaliser les Exceptions
 
-Vous pouvez également créer vos propres classes d'exception personnalisées en étendant la classe `Exception` ou l'une de ses sous-classes.
+- Vous pouvez également créer vos propres classes d'exception personnalisées en étendant la classe `Exception` ou l'une de ses sous-classes.
 
 ```java
 class MonException extends Exception {
@@ -230,7 +252,97 @@ class MonException extends Exception {
 }
 ```
 
-### 7. Les Méthodes de la classe ``Exception``:
+- **Exemples :**
+
+- fichier :**NbnégaticeException.java**
+```java
+
+public class NbnégativeException extends Exception
+{
+    public NbnégaiveException(String message)
+    {
+        super(message);
+    }
+}
+
+```
+- fichier : **Myclass.java**
+
+```java
+
+public class Myclass
+{
+    // .....
+
+
+    public void setNb(int nb) throws NbnégativeException
+    {
+        if(nb < 0 )
+        {
+            throw new  NbnégativeException("nb ne peut pas étre négative ... \n");
+        }
+        // .....
+    }
+}
+
+```
+
+
+
+### 7. Le mot-clé `throws` :
+
+- Le mot-clé `throws` en Java est utilisé dans la déclaration de méthode pour indiquer que la méthode peut potentiellement lancer certaines exceptions. 
+
+- Il s'agit d'une partie de la gestion des exceptions en Java, permettant aux développeurs de déclarer quelles exceptions spécifiques peuvent être générées par une méthode. Cela permet aux appelants de la méthode de savoir quelles exceptions ils doivent traiter lors de l'appel à cette méthode.
+
+- **Exemple :**
+
+    - Voici comment vous utilisez `throws` dans la signature d'une méthode :
+
+        ```java
+        public void maMethode() throws MonException {
+            // Code de la méthode
+        }
+        ```
+
+    - Dans l'exemple ci-dessus, `maMethode` déclare qu'elle peut potentiellement lancer une exception de type `MonException`. 
+    
+    - Les appelants de cette méthode devront :
+        
+        - soit attraper (`catch`) cette exception lors de l'appel à `maMethode`:
+
+            ```java
+            public void uneAutreMethode() throws MonException {
+                try
+                {    
+                    maMethode(); // Ma méthode peut lancer MonException
+            
+                }
+                catch(MonException e)
+                {
+                    // .....
+                }
+            }  
+            
+            ```
+        
+        - soit ils devront déclarer à leur tour qu'ils lancent cette exception (en utilisant `throws`) dans leur propre signature de méthode:
+
+            ```java
+            public void uneAutreMethode() throws MonException {
+                maMethode(); // Ma méthode peut lancer MonException
+            }
+            ```
+
+
+
+
+
+
+
+
+
+### 8. Les Méthodes de la classe ``Exception``:
 
 La classe `Exception` en Java est la classe de base pour toutes les exceptions. Elle offre plusieurs méthodes pour obtenir des informations sur l'exception qui s'est produite. Voici quelques-unes des méthodes les plus couramment utilisées de la classe `Exception` :
 
@@ -293,6 +405,94 @@ La classe `Exception` en Java est la classe de base pour toutes les exceptions. 
    ```
 
 En utilisant ces méthodes, vous pouvez obtenir des informations précieuses sur les exceptions qui se sont produites et les raisons sous-jacentes, ce qui facilite le débogage et la gestion des erreurs dans votre code.
+
+
+
+### RQ :  **La propagation d'une exception :**
+
+- La propagation d'une exception en programmation signifie que lorsqu'une exception est levée dans une méthode, elle peut être propagée (transmise) de cette méthode à son appelant ou à un niveau supérieur dans la pile d'appels. 
+
+- Cela se produit lorsqu'une  :
+    
+    - méthode ne gère pas l'exception elle-même (en utilisant un bloc `catch`) ou 
+    
+    - lorsque la méthode déclare explicitement qu'elle peut lancer cette exception (en utilisant `throws` dans la signature de la méthode) .
+
+- L'exception est alors remontée dans la pile d'appels jusqu'à ce qu'elle soit :
+    
+    - gérée par un bloc `catch` approprié ou 
+    
+    - qu'elle atteigne le haut niveau de votre programme, ce qui peut entraîner une interruption du programme.
+
+
+- **un exemple de propagation d'exception en Java :**
+
+```java
+public class TestException {
+    private static final boolean PANGOLIN_EXCEPTION = false;
+    private static final boolean NOMMAGE_EXCEPTION = false;
+    private static final boolean CANARD_EXCEPTION = false;
+    private static final boolean NBECAILLESINCORRECT_EXCEPTION = false;
+    private static final boolean NBMAXPANGOLIN_EXCEPTION = false;
+    private static final boolean ARITHMETIC_EXCEPTION = false;
+    private static final boolean ILLEGAL_ARGUMENT_EXCEPTION = false;
+
+    public static void m1() throws CanardException {
+        try {
+            System.out.println("Début de m1()");
+            m2();
+            System.out.println("Fin de m1()");
+        } catch (PangolinException e) {
+            System.out.println("Exception Pangolin (de m1()).");    
+        }
+    }
+
+    public static void m2() throws PangolinException, CanardException {
+        try {
+            System.out.println("Début de m2()");
+            m3();
+            System.out.println("Fin de m2()");
+        } catch (NbMaxPangolinException e) {
+            System.out.println("Exception nombre max pangolin (de m2()).");
+            throw new IllegalArgumentException();
+        } finally {
+            System.out.println("Finally de m2()");          
+        }
+        System.out.println("Fin de m2() après le try/catch/finally");
+    }
+
+    public static void m3() throws PangolinException, CanardException {
+        try {
+            System.out.println("Début de m3()");
+            if (PANGOLIN_EXCEPTION)
+                throw new PangolinException();
+            if (NOMMAGE_EXCEPTION)
+                throw new NommageException();
+            if (CANARD_EXCEPTION)
+                throw new CanardException();
+            if (NBECAILLESINCORRECT_EXCEPTION)
+                throw new NbEcaillesIncorrectException();
+            if (NBMAXPANGOLIN_EXCEPTION)
+                throw new NbMaxPangolinException();
+            if (ARITHMETIC_EXCEPTION)
+                throw new ArithmeticException();
+            if (ILLEGAL_ARGUMENT_EXCEPTION)
+                throw new IllegalArgumentException();
+            System.out.println("Fin de m3()");
+        } catch (NommageException e) {
+            System.out.println("Exception Nommage (de m3()).");
+        }
+    }
+
+    public static void main(String[] args) throws CanardException {
+        System.out.println("Début de la méthode principale");
+        m1();
+        System.out.println("Fin de la méthode principale");
+    }
+}
+```
+
+
 
 
 #### RQ : 

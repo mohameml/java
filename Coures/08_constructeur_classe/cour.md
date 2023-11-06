@@ -30,7 +30,7 @@ Les constructeurs sont des méthodes spéciales qui sont utilisées pour initial
   }
   ```
 
-**4. Le mot clé this :**
+**4. Le mot clé ``this`` :**
 
 En Java, le mot-clé `this` est utilisé pour faire référence à l'instance actuelle de la classe dans laquelle il est utilisé. Il permet de distinguer entre les attributs de la classe et les paramètres ou variables locales portant le même nom. 
 

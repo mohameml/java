@@ -21,7 +21,6 @@ public class Exemplewrite {
 
             brw.close();
         } catch (Exception e) {
-            // TODO: handle exception
 
             System.out.println("Errure :" + e.getMessage());
         }

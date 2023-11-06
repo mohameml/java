@@ -228,3 +228,34 @@ br.close();
 
 
 
+### RQ : **Analyse d'une String avec Scanner :**
+
+- on a La ligne de code suivent :  
+
+```java
+Scanner sc = new Scanner(exprString); // exprString : String 
+```
+
+- signifie que vous créez un nouvel objet de type `Scanner` en utilisant la chaîne de caractères `exprString` comme source d'entrée pour le scanner. 
+
+- En d'autres termes, vous pouvez analyser ou lire le contenu de la chaîne à l'aide de cet objet `Scanner`.
+
+- La classe `Scanner` en Java est utilisée pour analyser les entrées de différents types. Lorsque vous créez une instance de `Scanner` avec `exprString` comme argument, vous pouvez utiliser cet objet `sc` pour analyser la chaîne caractère par caractère, mot par mot, ou en fonction de délimiteurs spécifiques.
+
+- un exemple pour lire des mots individuels à partir de `exprString` à l'aide de l'objet `sc` :
+
+```java
+String exprString = "Ceci est un exemple.";
+Scanner sc = new Scanner(exprString);
+
+while (sc.hasNext()) {
+    String mot = sc.next(); // Lire un mot à la fois
+    System.out.println(mot);
+}
+
+sc.close(); // N'oubliez pas de fermer le Scanner à la fin de son utilisation
+```
+
+Dans cet exemple, la chaîne `exprString` est divisée en mots individuels à l'aide de la méthode `next()` du `Scanner`. Chaque mot est imprimé dans la console.
+
+La création d'un `Scanner` à partir d'une chaîne de caractères permet d'utiliser toutes les méthodes de lecture fournies par la classe `Scanner` pour traiter le contenu de cette chaîne comme une source d'entrée.

@@ -90,6 +90,75 @@
   }
   ```
 
+**10. méthodes particulières:**
+
+- En Java, il existe plusieurs méthodes particulières que vous pouvez implémenter dans vos classes pour personnaliser leur comportement. 
+
+- Parmi les méthodes particulières les plus couramment utilisées, on trouve `toString`, `equals`, `hashCode`, `compareTo`, et `clone`. 
+
+- **Description des méthodes particulières :**
+
+1. **`toString`** :
+
+  - La méthode `toString` est utilisée pour renvoyer une représentation sous forme de chaîne de l'objet. Elle est principalement utilisée pour afficher des informations significatives sur l'objet. 
+  
+  - Vous pouvez la redéfinir dans vos classes pour renvoyer une chaîne personnalisée qui décrit l'objet.
+
+   ```java
+   @Override
+   public String toString() {
+       return "Ceci est un objet personnalisé avec des informations spécifiques : " + this.someData;
+   }
+   ```
+
+2. **`equals`** :
+
+  - La méthode `equals` est utilisée pour comparer deux objets pour déterminer s'ils sont égaux. 
+  
+  - Vous devez la redéfinir pour comparer les champs de vos objets selon vos propres critères.
+
+   ```java
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Votreclass) {
+            return ((Votreclass) other).nom.equals(this.nom); // ie : O1==O2 ssi O1.nom==O2.nom
+        }
+        return false;
+    }
+   ```
+
+3. **`hashCode`** :
+   La méthode `hashCode` est utilisée pour retourner un code de hachage qui identifie un objet. Vous devez la redéfinir lorsque vous redéfinissez la méthode `equals` pour vous assurer que les objets égaux renvoient le même code de hachage.
+
+   ```java
+   @Override
+   public int hashCode() {
+       return Objects.hash(someField);
+   }
+   ```
+
+4. **`compareTo`** (pour les objets comparables) :
+   La méthode `compareTo` est utilisée pour comparer un objet avec un autre et déterminer leur ordre relatif. Elle est généralement utilisée pour trier des objets dans des collections. Vous devez la redéfinir si vous implémentez l'interface `Comparable`.
+
+   ```java
+   @Override
+   public int compareTo(MonObjet autreObjet) {
+       return this.someField - autreObjet.someField;
+   }
+   ```
+
+5. **`clone`** (pour la copie d'objets) :
+   La méthode `clone` est utilisée pour créer une copie de l'objet. Pour permettre la copie d'objets, vous devez implémenter l'interface `Cloneable` et redéfinir la méthode `clone`.
+
+   ```java
+   @Override
+   public Object clone() throws CloneNotSupportedException {
+       return super.clone();
+   }
+   ```
+
+
+
 ### RQ : 
 
 Dans la class Principale on uitilse tjrs de Méthodes avce des modificateures `public static`.

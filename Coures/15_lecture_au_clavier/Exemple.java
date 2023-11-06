@@ -18,5 +18,11 @@ public class Exemple {
         System.out.println("Taille : " + taille);
 
         scanner.close();
+    
+
+
+
     }
+
+
 }

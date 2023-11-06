@@ -2,7 +2,7 @@
 
 **1.Le Principe d'Encapsulation en POO**
 
-L'encapsulation est l'un des quatre piliers de la programmation orientée objet (POO), les autres étant l'abstraction, l'héritage et le polymorphisme. 
+- **L'encapsulation** est l'un des quatre piliers de la programmation orientée objet (POO), les autres étant **l'abstraction**, **l'héritage** et **le polymorphisme**. 
 
 L'encapsulation consiste à regrouper les données et les méthodes qui opèrent sur ces données dans une seule unité, appelée classe. Cela permet de cacher les détails internes et de fournir une interface de communication contrôlée avec l'extérieur.
 

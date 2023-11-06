@@ -64,6 +64,7 @@ public class Solution {
 
         for (int i = 0; i < s.length() - 1; i++) {
             int count = tailleMaxSubString(s, i);
+            System.out.println(count);
             list.add(count);
         }
 

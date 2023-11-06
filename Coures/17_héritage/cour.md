@@ -53,9 +53,19 @@ class Chien extends Animal {
 }
 ```
 
-### 4. Surcharge de Méthodes :
+### RQ :
 
-Les classes enfants peuvent surcharger (redéfinir) les méthodes de la classe parente pour adapter leur comportement. Lorsque vous appelez une méthode sur un objet de la classe enfant, la version redéfinie dans la classe enfant sera exécutée.
+- L'appel de ``super(...)`` doit toujours être la première instruction dans le corps du constructeur :
+    
+    - Si ce n'est pas le cas, alors le compilateur insère implicitement en 1ère ligne l'appel ``super()`` au constructeur par défaut (sans paramètres) de la mère. Si celui-ci n'existe pas, il y a une erreur.
+
+- Il est toujours recommandé d'initialiser les attributs hérités via super(...) et jamais directement.
+
+
+
+### 4. Rédefinition de Méthodes :
+
+- Les classes enfants peuvent  redéfinir les méthodes de la classe parente pour adapter leur comportement. Lorsque vous appelez une méthode sur un objet de la classe enfant, la version redéfinie dans la classe enfant sera exécutée.
 
 ```java
 class Shape {
@@ -66,6 +76,7 @@ class Shape {
 
 class Circle extends Shape {
     
+    @Override
     public void dessiner() {
         super.dessiner();
 
@@ -73,6 +84,36 @@ class Circle extends Shape {
     }
 }
 ```
+
+- **la visibilité lors d'une redéfinition :**
+
+    - La visibilité d'une méthode redéfinie doit être égale ou moins restrictive que celle de la méthode héritée :
+
+        - La redéfinition d'une méthode ``public`` ne peut être que ``public`` ;
+        - Celle d'une méthode ``protected`` peut être ``protected`` ou ``public`` ;
+        - Celle d'une méthode sans visibilité (``paquetage``) peut être ``paquetage``, ``protected`` ou ``public`` ;
+        - Enfin une méthode ``private`` ne peut pas être redéfinie puisqu'elle n'est pas accessibles aux filles ! (implicitement, elle est ``final``).
+    
+    - Par exemple : le problème en essayant de redéfinir ``String toString()`` (sans visibilité). Elle doit être ``public`` !
+
+### RQ1 : Redéfinition vs surcharge
+
+- **Attention** Ne pas confondre redéfinition (``override``; réécriture d'une méthode héritée) et surcharge (``overload``; ajout d'une nouvelle méthode de même nom) !
+
+    - **Surcharger une méthode** (dans une classe, ou dans une sous classe) signifie écrire une nouvelle méthode qui a le même nom qu'une méthode déjà existante, mais dont le nombre et/ou le type des paramètres diffère. Surcharger ajoute une nouvelle méthode à la classe.
+
+    - **Redéfinir une méthode** dans une sous-classe signifie écrire une méthode qui a exactement la même signature qu'une méthode héritée. La méthode redéfinie remplace, dans la clase fille, la méthode héritée.
+
+
+### RQ 2: **Annotations**
+
+- L'annotation ``@Override`` précédant : permet de notifier au compilateur qu'il s'agit bien de la redéfinition d'une méthode héritée ,Ceci évite de faire une surcharge par inadvertance (le programme ne compile plus), ce qui est une erreur assez commune mais potentiellement longue à détecter. Il est conseillé de toujours utiliser les annotations.
+
+### RQ3 :  **Remarque sur le type de retour pour la surcharge**
+
+- Il n'est pas possible de surcharger une méthode en ne changeant que son type de retour. 
+- Les paramètres doivent être différents, en nombre et/ou en type :
+    - Par exemple ``public void crier(boolean)`` ou ``public String crier(float, float)`` sont valides, mais pas ``public String crier()``. 
 
 
 ### 5. Exemple Complet  :
@@ -274,6 +315,36 @@ public class Horse {
 #### RQ : 
 
 Dans une sous-classe, vous pouvez accéder aux attributs hérités de la classe parente en utilisant le mot-clé `super`. Cependant, l'utilisation de `this` dans une sous-classe fera référence aux attributs de la sous-classe elle-même, pas à ceux de la classe parente.
+
+
+
+### RQ : **La super-classe Object**
+
+- **une hiérarchie de classes**  est en fait un arbre dont la racine est une première classe « qui n'a pas de mère ». 
+
+- En réalité, une classe qui ne définit pas de clause extends hérite implicitement d'une classe nommée ``Object`` :
+
+```java
+class Tatou extends Object {  // IMPLICITE quand on écrit juste : class Tatou
+    // ça change des Pangolins non?
+    [...]
+}
+
+
+```
+
+- En conséquence TOUTE classe hérite, directement ou indirectement, de Object. De ce fait, les méthodes définies dans la classe Object peuvent être invoquées sur tous les objets d'un programme.
+
+- Quelques-unes des principales méthodes de la classe Object sont :
+
+    - **public String toString() :** retourne la représentation d'un objet sous forme de chaîne de caractères ;
+
+    - **public boolean equals(Object obj) :** permet de comparer deux objets sémantiquement (selon leur état, leurs attributs, et pas uniquement égalité des références) ;
+
+    - **public int hashCode() :** retourne un identifiant entier unique associé à un objet. Ceci est surtout utilisé pour l'insertion dans des structures de données de type table de hachage.
+
+    - **protected void finalize() :** méthode exécutée par le ramasse-miettes au moment de la destruction d'un objet qui n'est plus référencé. 
+
 
 
 

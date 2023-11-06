@@ -1,0 +1,8 @@
+{
+    "java.project.referencedLibraries": [
+        "./code/lib/gui.jar"
+    ],
+    "java.project.sourcePaths": [
+        "./code/src"
+    ]
+}

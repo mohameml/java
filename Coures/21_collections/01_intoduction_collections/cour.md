@@ -256,6 +256,33 @@ Quelques spécificités des classes de collections pour manipuler vos données.
 
 
 
+## 5. Compléxite :
+
+Cheat-sheet des coûts associés aux principales collections
+----------------------------------------------------------
+
+Voici un tableau récapitulatif des coûts associés aux opérations sur les collections présentées dans cette fiche :
+
+| Interface List                 | Add    | Remove   | Get    | Contains   | Next   | Data Structure
+| :------------------------------|:------:|:--------:|:------:|:----------:|:------:|---------------:
+| ArrayList                      | O(1)   |  O(n)    | O(1)   |   O(n)     | O(1)   | Array
+| LinkedList                     | O(1)   |  O(1)    | O(n)   |   O(n)     | O(1)   | Doubly Linked List
 
 
+| Interface Set                    |    Add   |  Remove  | Contains |   Next   | Size | Data Structure
+| :--------------------------------|:--------:|:--------:|:--------:|:--------:|:----:|---------------:
+| HashSet                          | O(1)     | O(1)     | O(1)     | O(h/n)   | O(1) | Hash Table
+| TreeSet                          | O(log n) | O(log n) | O(log n) | O(log n) | O(1) | Red-black tree
 
+
+| Interface Queue                   |  Offer   | Peak |   Poll   | Remove | Size | Data Structure
+| :---------------------------------|:--------:|:----:|:--------:|:------:|:----:|---------------:
+| PriorityQueue                     | O(log n) | O(1) | O(log n) |  O(n)  | O(1) | Priority Heap
+| LinkedList                        | O(1)     | O(1) | O(1)     |  O(1)  | O(1) | Doubly Linked List
+| ArrayDequeue                      | O(1)     | O(1) | O(1)     |  O(n)  | O(1) | Array
+
+
+| Interface Map                   |   Get    | ContainsKey |   Next   | Data Structure
+| :-------------------------------|:--------:|:-----------:|:--------:|---------------:
+| HashMap                         | O(1)     |   O(1)      | O(h / n) | Hash Table
+| TreeMap                         | O(log n) |   O(log n)  | O(log n) | Red-black tree
