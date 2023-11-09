@@ -111,9 +111,10 @@ abstraites dans les classes de haut niveau  ;
 - **compte rendu : pdf en 4 pages aux max**
 
 
+## 4. **Documentation du ``gui.jar``:**
 
 
-## 4. **L'intérface `Simulable`:**
+### a. **L'intérface `Simulable`:**
 
 - Objet de simulation pour être associée à une interface graphique de type ``GUISimulator``.
 
@@ -123,7 +124,7 @@ abstraites dans les classes de haut niveau  ;
 
     - ``void restart()`` : Remet le simulateur dans son état initial.
 
-## 5. **la classe  ``GUISimulator``:**
+### b. **la classe  ``GUISimulator``:**
 
 
 - **Définition:**
@@ -186,7 +187,7 @@ abstraites dans les classes de haut niveau  ;
 
 
 
-## 6. **Calss `Oval`:**
+### c. **Calss `Oval`:**
 
 - **Définition:**
     
@@ -213,7 +214,7 @@ abstraites dans les classes de haut niveau  ;
         - Translate l'élément graphique.
 
 
-## 7.  **Class ``Rectangle``:**
+### d.  **Class ``Rectangle``:**
 
 - **Définition:**
 
@@ -242,7 +243,7 @@ abstraites dans les classes de haut niveau  ;
     -  ``void translate(int tx, int ty):``
         - Translate l'élément graphique.
 
-## 8. **Class  ``Text``:**
+### e. **Class  ``Text``:**
 
 - **Définition:**
     
@@ -266,7 +267,56 @@ abstraites dans les classes de haut niveau  ;
         - Translate l'élément graphique.
 
 
-### RQ :
+#### RQ :
 
 - **Interface GraphicalElement:**
     - Les classes réalisant cette interface permettent de dessiner un élément graphique dans la fenêtre graphique.
+
+
+## 5. **Un modèle d’essaims : ``les boids``**
+
+### 5.1 **`Introduction`:**
+
+- **Définition:**
+
+    - le modéle de boids c'est un modéle pour simuler le déplacement d'agents en essaims .
+
+    - modèle a été proposé par ***Craig Reynolds** pour l’animation graphique de groupes d’animaux auto-organisés,
+    tels des essaims d’oiseaux ou de poissons.
+
+    - Ces agents sont appelés des boids 
+
+
+- **les comportoment des boids:**
+    -  les boids  se déplacent librement dans l’espace 2D . 
+    
+    - Le comportement d’un agent dépend de la position et de l’orientation des agents l’environnant, c’est-à-dire qui sont suffisamment près de lui et dans son champ de vision. 
+
+
+    - . Le modèle de base repose sur l’application de trois règles :
+
+        - **Cohésion:**  un agent se dirige vers la position moyenne (centre de masse) des ses voisins ;
+
+        - **Alignement:** un agent tend à se déplacer dans la même direction que ses voisins ;
+
+        - **Séparation:** les agents trop proches se repoussent, pour éviter les collisions.
+
+        ![images](images/boids.jpeg)
+
+
+
+    - Ces trois règles sont suffisantes pour observer la formation spontanée de groupes, à partir d’agents initialement répartis de manière aléatoire. 
+    
+    - D’autres règles peuvent ensuite être ajoutées : points d’attraction ou de répulsion, suivi de trajectoires, contournement d’obstacles, vents et courants, etc.
+
+
+
+### RQ :
+
+- **La notion de voisinage:** dépend de la distance et éventuellement de l’orientation. Un boid n’est par exemple influencé que par des boids suffisamment proches et dans son champs de vision (pas derrière lui).
+
+![images](images/voisinage.jpeg)
+
+
+
+### 5.2 **Programmation d’un système de boids:**

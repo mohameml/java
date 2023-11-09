@@ -59,8 +59,18 @@ runTestBallesSimulator : compileTestBallesSimulator
 
 
 
+compileTestBoids :
+		javac -d ./bin/ -classpath lib/gui.jar -sourcepath src/ src/TestBoids.java
+
+runTestBoids : compileTestBoids 
+	java -cp bin:lib/gui.jar TestBoids 
 
 
+compileTestVecteur :
+	javac -d ./bin -sourcepath src/ src/TestVecteur.java
+
+runTestVecteur : compileTestVecteur
+	java -cp ./bin/ TestVecteur 
 
 clean:
 	rm -r bin/*

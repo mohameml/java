@@ -37,11 +37,11 @@ public class BallesSimulator implements Simulable
         
         this.balles = new Balles();
         this.balles.addBalle(new Point(50,50));
-        this.balles.addBalle(new Point(100,120));
-        this.balles.addBalle(new Point(300,40));
-        this.balles.addBalle(new Point(150,150));
-        this.balles.addBalle(new Point(400,60));
-        this.balles.addBalle(new Point(30,240));        
+        // this.balles.addBalle(new Point(100,120));
+        // this.balles.addBalle(new Point(300,40));
+        // this.balles.addBalle(new Point(150,150));
+        // this.balles.addBalle(new Point(400,60));
+        // this.balles.addBalle(new Point(30,240));        
         
         draw();
     }
