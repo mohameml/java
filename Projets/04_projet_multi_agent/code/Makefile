@@ -72,6 +72,14 @@ compileTestVecteur :
 runTestVecteur : compileTestVecteur
 	java -cp ./bin/ TestVecteur 
 
+
+compileTestEvent :
+	javac -d ./bin/ -sourcepath ./src/ ./src/TestEventManager.java
+
+runTestEvent : compileTestEvent
+	java -cp ./bin TestEventManager 
+
+
 clean:
 	rm -r bin/*
 

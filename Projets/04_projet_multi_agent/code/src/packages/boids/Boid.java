@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-public class Boid {
+public class Boid
+{
 
     // -- pour génere des points aleatoire :
     Random random = new Random();
@@ -14,18 +15,12 @@ public class Boid {
 
     /*----------------------------------- les attributs : -------------------------------- */
 
-    /* les positions de boids : */    
+    /* la positions de boid : */    
     private Vecteur position = new Vecteur(random.nextInt(600) , random.nextInt(800))   ;
     
-    // private Vecteur position ;
-
-    // private Point position = new Point(200,200) ;
 
     /* la vitesse de boid : */
-    private Vecteur vitesse = new Vecteur(random.nextInt(800) , random.nextInt(800)); // valeur par défaut pour la simulation par défaut 
-    // private Vecteur vitesse ; // valeur par défaut pour la simulation par défaut 
-
-    
+    private Vecteur vitesse = new Vecteur(random.nextInt(800) , random.nextInt(800)); 
 
     /* l'accéleration de boids : */
     private Vecteur accéleration = new Vecteur(0,0) ;
@@ -37,13 +32,12 @@ public class Boid {
     /* la distance de boid : pour connaitre les voisinages de ce boid  */
     private static double distance = 50 ;
 
-    // /* la force maximale  */
-    // private static double forceMax = 0.1;
+    /* la seuille maximale entre deux boid : */
+    private static double seuil = 20 ;
 
 
-    /* les voisins :  */
 
-    ArrayList<Boid> voisins = new ArrayList<>();
+
 
 
     
@@ -56,29 +50,26 @@ public class Boid {
         return this.position;
     }
 
+    /* la méthode getVitesse  */
     public Vecteur getVitesse()
     {
         return this.vitesse;
     }
 
+    /* la méthode getAccéleration : */
     public Vecteur getAccéleration()
     {
         return this.accéleration;
     }
 
 
-    /* la méthode getVoisins: */
-    public ArrayList<Boid> getVoisins()
-    {
-        return this.voisins;
-    }
 
 
     /*-------------------------------  les constructeures : ----------------------------------- */
 
     public Boid()
     {
-        this.vitesse.setNorme((double)random.nextInt(4));
+        this.vitesse.setNorme((double)random.nextInt(5));
     }
 
     public Boid(Point p , Point v)
@@ -99,7 +90,7 @@ public class Boid {
 
 
 
-    /*--------------------------------- des méthodes de manipulation :------------------------  */
+
 
     /* --------------- la méthode calculDistance : ----------------------- */
 
@@ -128,19 +119,28 @@ public class Boid {
 
         // mis à jour de l'accéleration du boid :
 
-        //Point p1 = this.Alignement();
+        Vecteur v1 = this.Alignement(boids);
         Vecteur v2 = this.Cohésion(boids);
-        // Point p3 = this.Séparation();
+        Vecteur v3 = this.Séparation(boids);
 
+        this.accéleration.add(v1);
         this.accéleration.add(v2);
+        this.accéleration.add(v3);
 
-        this.position.add(this.vitesse);
+
+
+        
         
         // mis à jour de la vitesse de boid : 
+
         this.vitesse.add(this.accéleration);
         this.vitesse.limite(Boid.normeVitesseMax);
 
+
+
         // mis à jour de la postion du boid : 
+        this.position.add(this.vitesse);
+
 
 
         // les efets de bord : 
@@ -148,7 +148,6 @@ public class Boid {
 
 
 
-        // this.accéleration.setPoint(0, 0);
         
 
     }
@@ -203,11 +202,10 @@ public class Boid {
         for(Boid boid : boids)
         {
             double dis = calculDistance(this.position.getPoint() , boid.getPosition().getPoint());
-            // System.out.println("dis = " + dis);
+
 
             if( !boid.equals(this) && dis < Boid.distance)
             {
-                // System.out.println("je suis la et je suis le boid "+boid.getPosition()+ " mnt nous somme dans le boid "+this.position);
                 v.add(boid.getPosition());
                 total++;
             }
@@ -215,7 +213,7 @@ public class Boid {
 
         if(total > 0)
         {
-            // System.out.println("total = "+total);
+
             double c = (double)1/total;
 
             v.mult(c);
@@ -227,59 +225,98 @@ public class Boid {
 
             v.sub(this.vitesse);
 
-
-            // v.limite(Boid.forceMax);
-
-
-
-
-            // System.out.println("au fin de bloc if v = "+v);
         }
 
-        // System.out.println(v);
-        // System.out.println(v);
-        // System.out.println();
 
-        // System.out.println(" Avant return v = "+v);
         return v;
     }
 
 
     /* ------------------------------ Alignement un agent tend à se déplacer dans la même direction que ses voisins : ------------- */
 
-    // public Point Alignement()
-    // {
-    //     /* l'idéde ici que le boid , il calcule la vitesse moyenne de ses voissois et change sa vitesse vers la vitesse moyenne de ses voisins  */
-    //     Point point = new Point(0,0);
 
-    //     int total = this.voisins.size();
+    public Vecteur Alignement(ArrayList<Boid> boids)
+    {
+        Vecteur v = new Vecteur(0,0);
 
-    //     for(Boid boid : this.voisins)
-    //     {
-    //         add(point , boid.getVitesse());
-    //     }
+        int total = 1 ;
 
-    //     if(total > 0)
-    //     {
-    //         mult(point, 1/ total);
+        for(Boid boid : boids)
+        {
+            double dis = calculDistance(this.position.getPoint() , boid.getPosition().getPoint());
 
-    //     }
+            if( !boid.equals(this) && dis < Boid.distance)
+            {
+                v.add(boid.getVitesse());
+                total++;
+            }
+        }
+
+        if(total > 0)
+        {
+
+            double c = (double)1/total;
+
+            v.mult(c);
+
+            v.setNorme(Boid.normeVitesseMax);
 
 
-    //     return point;
-    // }
+            v.sub(this.vitesse);
 
+        }
 
+        return v;
+    }
 
 
 
 
     /* ---------------------- Séparation les agents trop proches se repoussent, pour éviter les collisions : ------------------- */
 
-    // public Point Séparation()
-    // {
+    public Vecteur Séparation(ArrayList<Boid> boids)
+    {
+        
+        Vecteur v = new Vecteur(0,0);
 
-    // }
+        int total = 1 ;
+
+        for(Boid boid : boids)
+        {
+            double dis = calculDistance(this.position.getPoint() , boid.getPosition().getPoint());
+
+
+            if( !boid.equals(this) && dis < Boid.seuil)
+            {
+                Vecteur diff =  new Vecteur((int)this.position.getPoint().getX() , (int)this.position.getPoint().getY());
+                diff.sub(boid.getPosition());
+                
+                double invDis = (double)1/dis;
+
+                diff.mult(invDis);
+                
+                v.add(diff);
+                total++;
+            }
+        }
+
+        if(total > 0)
+        {
+
+            double c = (double)1/total;
+
+            v.mult(c);
+
+            v.setNorme(Boid.normeVitesseMax);
+
+
+            v.sub(this.vitesse);
+
+
+        }
+
+        return v;
+    }
 
 
 

@@ -5,6 +5,7 @@ import java.awt.Point;
 /* 
     class qui modélise un vecteur 2D : 
 */
+
 public class Vecteur 
 {
 

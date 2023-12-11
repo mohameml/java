@@ -82,9 +82,6 @@ public class BoidsSimulator implements Simulable
             new Oval((int) boid.getPosition().getPoint().getX(),(int) boid.getPosition().getPoint().getY() , 
             Color.YELLOW, Color.BLACK, 10)
             );
-
-            //System.out.println(" ma position = " + boid.getPosition() + " ma vitesse = " + boid.getVitesse());
-        // draw();
            
         }
 
@@ -105,8 +102,6 @@ public class BoidsSimulator implements Simulable
         for(Boid boid : boids.getBoids())
         {
             Point point = boid.getPosition().getPoint();
-
-            // ArrayList<Boid> voisins = boid.getVoisins();
 
             gui.addGraphicalElement(new Oval( (int)point.getX(), (int)point.getY(), Color.YELLOW, Color.BLACK, 10));
 
