@@ -37,7 +37,7 @@ public class Point implements Deplacable {
     }
 
     @Override
-    public toString() {
+    public String toString() {
         return "Point (" + x + ", " + y + ")";
     }
 }
