@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: fr.exemple.MyTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec <<< FAILURE!
+fr.exemple.MyTest.testAddition()  Time elapsed: 0.002 sec  <<< FAILURE!
+java.lang.Error: Unresolved compilation problems: 
+	Test cannot be resolved to a type
+	The method assertEquals(int, int) is undefined for the type MyTest
+	at fr.exemple.MyTest.testAddition(MyTest.java:8)
+
